@@ -21,5 +21,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "axios-mock-adapter": "^1.16.0",
+    "jest": "^24.7.1",
+    "react-testing-library": "^6.1.2"
+  }
 }
