@@ -26,7 +26,6 @@ describe('JokeGenerator', () => {
 
     afterEach(() => {
         cleanup();
-        mock.restore();
     });
 
     it('should show default message when no joke is loaded', () => {
@@ -62,11 +61,15 @@ describe('JokeGenerator', () => {
             await wait(() => expect(queryByText('Loading...')).not.toBeInTheDocument());
         });
 
-        it('should display joke', async () => {
+        it('should display joke', () => {
     
             expect(queryByTestId('joke-text')).toHaveTextContent(
                 'Really funny joke'
             )
         });
+
+        afterEach(() => {
+            mock.restore();
+        })
     });
 });
