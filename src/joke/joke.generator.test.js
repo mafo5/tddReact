@@ -43,6 +43,10 @@ describe('JokeGenerator', () => {
             expect(element.queryByText('You haven\'t loaded any joke yet!')).not.toBeInTheDocument();
             expect(element.queryByText('Loading...')).toBeInTheDocument();
         });
+
+        afterEach(() => {
+            mock.restore();
+        });
     });
 
     describe('when a joke is loaded', () => {
