@@ -31,11 +31,15 @@ describe('JokeGenerator', () => {
         expect(getByText('Load a random joke')).toBeInTheDocument();
     });
 
-    it('should fetches a random joke and renders it', async () => {
-    
-        getByText('Load a random joke').click();
+    describe('when load joke button is clicked', () => {
+        beforeEach(() => {
+            getByText('Load a random joke').click();
+        });
 
-        expect(queryByText('You haven\'t loaded any joke yet!')).not.toBeInTheDocument();
-        expect(queryByText('Loading...')).toBeInTheDocument();
+        it('should display loading', () => {
+    
+            expect(queryByText('You haven\'t loaded any joke yet!')).not.toBeInTheDocument();
+            expect(queryByText('Loading...')).toBeInTheDocument();
+        });
     });
 });
