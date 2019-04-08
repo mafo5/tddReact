@@ -1,6 +1,6 @@
 import React from 'react';
 import JokeGenerator from './joke.generator';
-import { render, Simulate } from 'react-testing-library';
+import { render, fireEvent, waitForElement, cleanup } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
 describe('JokeGenerator', () => {
@@ -33,7 +33,9 @@ describe('JokeGenerator', () => {
 
     it('should fetches a random joke and renders it', async () => {
     
+        getByText('Load a random joke').click();
+
         expect(queryByText('You haven\'t loaded any joke yet!')).not.toBeInTheDocument();
-        expect(queryByText('Loading ...')).toBeInTheDocument();
+        expect(queryByText('Loading...')).toBeInTheDocument();
     });
 });
