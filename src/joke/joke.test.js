@@ -3,13 +3,21 @@ import Joke from './joke';
 import { render } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
-test('Joke componente receives props and then renders text', () => {
-    // renders Joke component with some text prop
-    const { getByTestId } = render(
-        <Joke text="The funniest joke this year" ></Joke>
-    );
+describe('Joke', () => {
 
-    expect(getByTestId('joke-text')).toHaveTextContent(
-        'The funniest joke this year'
-    );
+    let getByTestId;
+    beforeEach(() => {
+        // renders Joke component with some text prop
+        const element = render(
+            <Joke text="The funniest joke this year" ></Joke>
+        );
+        getByTestId = element.getByTestId;
+    });
+
+    it('should receives props and then renders text', () => {
+
+        expect(getByTestId('joke-text')).toHaveTextContent(
+            'The funniest joke this year'
+        );
+    });
 });

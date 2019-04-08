@@ -3,23 +3,30 @@ import JokeGenerator from './joke.generator';
 import { render, Simulate } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
-test('JokeGenerator should show default message when no joke is loaded', () => {
-    // renders JokeGenerator
-    const { getByText } = render(
-        <JokeGenerator></JokeGenerator>
-    );
+describe('JokeGenerator', () => {
 
-    expect(getByText('You haven\'t loaded any joke yet!')).toBeInTheDocument();
-});
+    let getByText;
+    let queryByText;
 
-test('JokeGenerator componente fetches a random joke and renders it', () => {
-    // renders JokeGenerator
-    const { getByText, queryByText } = render(
-        <JokeGenerator></JokeGenerator>
-    );
+    beforeEach(() => {
+        // renders JokeGenerator
+        const element = render(
+            <JokeGenerator></JokeGenerator>
+        );
+        getByText = element.getByText;
+        queryByText = element.queryByText;
+    });
 
-    Simulate.click(getByText('Load a random Joke'));
+    it('JokeGenerator should show default message when no joke is loaded', () => {
 
-    expect(queryByText('You haven\'t loaded any joke yet!')).not.toBeInTheDocument();
-    expect(queryByText('Loading ...')).toBeInTheDocument();
+        expect(getByText('You haven\'t loaded any joke yet!')).toBeInTheDocument();
+    });
+
+    it('should fetches a random joke and renders it', () => {
+    
+        Simulate.click(getByText('Load a random Joke'));
+    
+        expect(queryByText('You haven\'t loaded any joke yet!')).not.toBeInTheDocument();
+        expect(queryByText('Loading ...')).toBeInTheDocument();
+    });
 });
