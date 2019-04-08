@@ -5,6 +5,12 @@ import React from 'react';
 import { cleanup, render, wait } from 'react-testing-library';
 import JokeGenerator from './joke.generator';
 
+jest.mock('./joke', () => ({ text }) => (
+    <div data-testid="joke-text">
+        JOKE {text}
+    </div>
+));
+
 describe('JokeGenerator', () => {
 
     let element;
@@ -68,7 +74,7 @@ describe('JokeGenerator', () => {
         it('should display joke', () => {
     
             expect(element.queryByTestId('joke-text')).toHaveTextContent(
-                'Really funny joke'
+                'JOKE Really funny joke'
             )
         });
 
