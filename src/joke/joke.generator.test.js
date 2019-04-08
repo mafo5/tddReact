@@ -26,9 +26,12 @@ describe('JokeGenerator', () => {
         expect(getByText('You haven\'t loaded any joke yet!')).toBeInTheDocument();
     });
 
-    it('should fetches a random joke and renders it', () => {
-    
-        Simulate.click(getByText('Load a random Joke'));
+    it('should display button to load joke', () => {
+
+        expect(getByText('Load a random joke')).toBeInTheDocument();
+    });
+
+    it('should fetches a random joke and renders it', async () => {
     
         expect(queryByText('You haven\'t loaded any joke yet!')).not.toBeInTheDocument();
         expect(queryByText('Loading ...')).toBeInTheDocument();
