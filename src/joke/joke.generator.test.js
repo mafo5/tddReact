@@ -7,19 +7,14 @@ import JokeGenerator from './joke.generator';
 
 describe('JokeGenerator', () => {
 
-    let getByText;
-    let queryByText;
-    let queryByTestId;
+    let element;
     let mock;
 
     beforeEach(() => {
         // renders JokeGenerator
-        const element = render(
+        element = render(
             <JokeGenerator></JokeGenerator>
         );
-        getByText = element.getByText;
-        queryByText = element.queryByText;
-        queryByTestId = element.queryByTestId;
 
         mock = new MockAxios(axios, { delayResponse: Math.random() * 500 });
     });
@@ -30,23 +25,23 @@ describe('JokeGenerator', () => {
 
     it('should show default message when no joke is loaded', () => {
 
-        expect(getByText('You haven\'t loaded any joke yet!')).toBeInTheDocument();
+        expect(element.getByText('You haven\'t loaded any joke yet!')).toBeInTheDocument();
     });
 
     it('should display button to load joke', () => {
 
-        expect(getByText('Load a random joke')).toBeInTheDocument();
+        expect(element.getByText('Load a random joke')).toBeInTheDocument();
     });
 
     describe('when load joke button is clicked', () => {
         beforeEach(() => {
-            getByText('Load a random joke').click();
+            element.getByText('Load a random joke').click();
         });
 
         it('should display loading', () => {
     
-            expect(queryByText('You haven\'t loaded any joke yet!')).not.toBeInTheDocument();
-            expect(queryByText('Loading...')).toBeInTheDocument();
+            expect(element.queryByText('You haven\'t loaded any joke yet!')).not.toBeInTheDocument();
+            expect(element.queryByText('Loading...')).toBeInTheDocument();
         });
     });
 
@@ -57,19 +52,19 @@ describe('JokeGenerator', () => {
                     joke: 'Really funny joke',
                 }
             });
-            getByText('Load a random joke').click();
-            await wait(() => expect(queryByText('Loading...')).not.toBeInTheDocument());
+            element.getByText('Load a random joke').click();
+            await wait(() => expect(element.queryByText('Loading...')).not.toBeInTheDocument());
         });
 
         it('should display joke', () => {
     
-            expect(queryByTestId('joke-text')).toHaveTextContent(
+            expect(element.queryByTestId('joke-text')).toHaveTextContent(
                 'Really funny joke'
             )
         });
 
         afterEach(() => {
             mock.restore();
-        })
+        });
     });
 });
