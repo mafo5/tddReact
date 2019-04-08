@@ -9,5 +9,5 @@ test('JokeGenerator componente fetches a random joke and renders it', () => {
         <JokeGenerator></JokeGenerator>
     );
 
-    expect(getByText('You haven\'t loaded any joke yet!')).toBeInTheDOM();
+    expect(getByText('You haven\'t loaded any joke yet!')).toBeInTheDocument();
 });
