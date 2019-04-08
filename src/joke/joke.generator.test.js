@@ -1,15 +1,13 @@
 import React from 'react';
-import Joke from './joke';
+import JokeGenerator from './joke.generator';
 import { render } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
-test('Joke componente receives props and then renders text', () => {
-    // renders Joke component with some text prop
-    const { getByTestId } = render(
-        <Joke text="The funniest joke this year" ></Joke>
+test('JokeGenerator componente fetches a random joke and renders it', () => {
+    // renders JokeGenerator
+    const { getByText } = render(
+        <JokeGenerator></JokeGenerator>
     );
 
-    expect(getByTestId('joke-text')).toHaveTextContent(
-        'The funniest joke this year'
-    );
+    expect(getByText('You haven\'t loaded any joke yet!')).toBeInTheDOM();
 });
