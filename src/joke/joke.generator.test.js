@@ -17,7 +17,11 @@ describe('JokeGenerator', () => {
         queryByText = element.queryByText;
     });
 
-    it('JokeGenerator should show default message when no joke is loaded', () => {
+    afterEach(() => {
+        cleanup();
+    });
+
+    it('should show default message when no joke is loaded', () => {
 
         expect(getByText('You haven\'t loaded any joke yet!')).toBeInTheDocument();
     });

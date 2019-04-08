@@ -1,6 +1,6 @@
 import React from 'react';
 import Joke from './joke';
-import { render } from 'react-testing-library';
+import { render, cleanup } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
 describe('Joke', () => {
@@ -12,6 +12,10 @@ describe('Joke', () => {
             <Joke text="The funniest joke this year" ></Joke>
         );
         getByTestId = element.getByTestId;
+    });
+
+    afterEach(() => {
+        cleanup();
     });
 
     it('should receives props and then renders text', () => {
