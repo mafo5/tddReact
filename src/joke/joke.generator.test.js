@@ -15,8 +15,6 @@ describe('JokeGenerator', () => {
         element = render(
             <JokeGenerator></JokeGenerator>
         );
-
-        mock = new MockAxios(axios, { delayResponse: Math.random() * 500 });
     });
 
     afterEach(() => {
@@ -35,6 +33,12 @@ describe('JokeGenerator', () => {
 
     describe('when load joke button is clicked', () => {
         beforeEach(() => {
+            mock = new MockAxios(axios, { delayResponse: Math.random() * 500 });
+            mock.onGet().replyOnce(200, {
+                value: {
+                    joke: 'Really funny joke',
+                }
+            });
             element.getByText('Load a random joke').click();
         });
 
@@ -51,6 +55,7 @@ describe('JokeGenerator', () => {
 
     describe('when a joke is loaded', () => {
         beforeEach(async () => {
+            mock = new MockAxios(axios, { delayResponse: Math.random() * 500 });
             mock.onGet().replyOnce(200, {
                 value: {
                     joke: 'Really funny joke',
