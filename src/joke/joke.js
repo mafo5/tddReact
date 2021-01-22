@@ -1,7 +1,9 @@
 import React from 'react';
 
-export default ({ text }) => (
+const joke = ({ text }) => (
     <div data-testid="joke-text">
         {text}
     </div>
 );
+
+export default joke;

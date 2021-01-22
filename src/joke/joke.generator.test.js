@@ -1,8 +1,8 @@
+import '@testing-library/jest-dom/extend-expect';
+import { cleanup, render, wait } from '@testing-library/react';
 import * as axios from 'axios';
 import MockAxios from 'axios-mock-adapter';
-import 'jest-dom/extend-expect';
 import React from 'react';
-import { cleanup, render, wait } from 'react-testing-library';
 import JokeGenerator from './joke.generator';
 
 jest.mock('./joke', () => ({ text }) => (
